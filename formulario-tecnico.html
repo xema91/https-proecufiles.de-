@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Formulario técnico de pedido | ProECU Files (B2B)</title>
+  <meta name="description" content="Formulario técnico de pedido B2B para fileservice ECU/TCU. Estructura tipo ficha técnica de proyecto, con validación final por archivo original y referencias HW/SW.">
+  <style>
+    :root{
+      --primary:#3b82f6;
+      --primary-light:#60a5fa;
+      --primary-dark:#2563eb;
+      --bg:#0a0a0b;
+      --panel:#0f0f11;
+      --card:#141416;
+      --card2:#1a1a1d;
+      --text:#f4f4f5;
+      --muted:#a1a1aa;
+      --border:#27272a;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --whatsapp:#25D366;
+      --shadow:0 18px 50px rgba(0,0,0,.45);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,sans-serif;line-height:1.5;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    header{background:rgba(10,10,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
+    .brand{font-weight:900;letter-spacing:-.3px}
+    .brand span{color:var(--primary)}
+    .navlinks{display:flex;gap:18px;list-style:none;flex-wrap:wrap}
+    .navlinks a{color:var(--muted);font-size:.95rem}
+    .navlinks a:hover{color:var(--primary)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 14px;border-radius:10px;border:1px solid transparent;font-weight:900;font-size:.93rem;cursor:pointer;transition:.2s}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.primary:hover{background:var(--primary-dark)}
+    .btn.outline{background:transparent;border-color:var(--border);color:var(--text)}
+    .btn.outline:hover{border-color:var(--primary);color:var(--primary)}
+    .btn.whatsapp{background:var(--whatsapp);color:#fff}
+    .btn.whatsapp:hover{filter:brightness(.95)}
+
+    .breadcrumb{padding:16px 0;color:var(--muted);font-size:.92rem}
+    .breadcrumb a{color:var(--primary-light)}
+
+    .hero{padding:26px 0 14px}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:7px 12px;border-radius:999px;border:1px solid rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:var(--primary-light);font-weight:900;font-size:.82rem;margin-bottom:10px}
+    h1{font-size:1.8rem;letter-spacing:-.7px;line-height:1.2;margin-bottom:8px}
+    .lead{color:var(--muted);max-width:980px}
+
+    .workspace{
+      margin:18px 0 40px;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .wsTop{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:14px 14px;
+      background:rgba(255,255,255,.02);
+      border-bottom:1px solid var(--border);
+    }
+    .wsTitle{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .wsTitle .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(0,0,0,.2);color:var(--muted);font-weight:800;font-size:.82rem}
+    .wsTitle .tag b{color:var(--text)}
+
+    .layout{display:grid;grid-template-columns:78px 1fr;min-height:620px}
+
+    /* Sidebar inspired by classic project property panes */
+    .sidebar{
+      border-right:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(20,20,22,.9), rgba(12,12,14,.9));
+      display:flex;flex-direction:column;gap:10px;
+      padding:12px 8px;
+    }
+    .sideBtn{
+      position:relative;
+      height:92px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:.2s;
+      overflow:hidden;
+    }
+    .sideBtn:hover{border-color:rgba(59,130,246,.5);color:var(--primary-light)}
+    .sideBtn.active{border-color:rgba(59,130,246,.7);background:rgba(59,130,246,.12);color:var(--text)}
+    .sideBtn span{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      font-weight:900;
+      letter-spacing:.8px;
+      font-size:.82rem;
+    }
+    .sideBtn i{
+      position:absolute;top:8px;left:8px;
+      width:10px;height:10px;border-radius:4px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .sideBtn.active i{background:rgba(16,185,129,.25);border-color:rgba(16,185,129,.35)}
+
+    .main{
+      background:radial-gradient(1200px 600px at 60% -40%, rgba(59,130,246,.10), transparent 60%),
+                 radial-gradient(900px 500px at 120% 20%, rgba(245,158,11,.07), transparent 55%),
+                 var(--panel);
+      padding:16px;
+    }
+
+    .mainGrid{display:grid;grid-template-columns:1fr 360px;gap:14px;align-items:start}
+    .formArea{min-width:0}
+    .filePanel{
+      position:sticky;
+      top:12px;
+      align-self:start;
+      background:rgba(255,255,255,.02);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:14px;
+      min-height:240px;
+    }
+    .filePanel h3{font-size:1.05rem;letter-spacing:-.2px;margin-bottom:6px}
+    .filePanel .sub{color:var(--muted);font-size:.92rem;margin-bottom:10px}
+
+    .pane{display:none}
+    .pane.active{display:block}
+
+    .paneHeader{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .paneHeader h2{font-size:1.25rem;letter-spacing:-.3px}
+    .paneHeader p{color:var(--muted);font-size:.92rem;max-width:760px}
+
+    .propGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .field{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:12px}
+    .field label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.86rem;color:var(--muted);font-weight:900;margin-bottom:8px}
+    .field label em{font-style:normal;color:rgba(239,68,68,.95)}
+    input,select,textarea{
+      width:100%;
+      padding:11px 11px;
+      background:#0c0c0e;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:10px;
+      color:var(--text);
+      font-size:.95rem;
+      font-family:inherit;
+    }
+    input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(59,130,246,.75)}
+    textarea{min-height:140px;resize:vertical}
+
+    .field.small input,.field.small select{padding:10px 10px}
+    .field.full{grid-column:1 / -1}
+
+    .helpBar{
+      margin-top:14px;
+      padding:12px 12px;
+      border:1px solid rgba(245,158,11,.35);
+      background:rgba(245,158,11,.10);
+      border-radius:12px;
+      color:var(--muted);
+      display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;
+    }
+    .helpBar strong{color:var(--warn)}
+
+    .dropzone{
+      margin-top:12px;
+      border:1px dashed rgba(96,165,250,.55);
+      background:rgba(59,130,246,.06);
+      border-radius:14px;
+      padding:14px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+    .dropzone .t{font-weight:900;margin-bottom:2px}
+    .dropzone .d{color:var(--muted);font-size:.92rem}
+    .dropzone input[type=file]{display:none}
+
+    .actions{
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+    }
+
+    .toast{
+      position:fixed;right:16px;bottom:16px;z-index:1200;
+      background:rgba(20,20,22,.95);
+      border:1px solid var(--border);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      display:none;
+      max-width:min(520px, calc(100vw - 32px));
+    }
+    .toast.show{display:block}
+    .toast .k{font-weight:900;margin-bottom:4px}
+    .toast .m{color:var(--muted);font-size:.92rem}
+
+    footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font-size:.92rem}
+
+    @media(max-width:980px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{flex-direction:row;justify-content:flex-start;overflow:auto}
+      .sideBtn{height:54px;min-width:140px}
+      .sideBtn span{writing-mode:horizontal-tb;transform:none;letter-spacing:.2px}
+      .mainGrid{grid-template-columns:1fr}
+      .filePanel{position:relative;top:auto;grid-row:1}
+      .formArea{grid-row:2}
+      .propGrid{grid-template-columns:1fr}
+      .dropzone{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">ProECU<span>Files</span></div>
+        <ul class="navlinks">
+          <li><a href="/es/">Home</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="ecu-familias.html">Familias ECU</a></li>
+          <li><a href="alta-profesional.html">Alta</a></li>
+        </ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn outline" href="mailto:info@proecufiles.de">Email</a>
+          <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb"><a href="/es/">Inicio</a> / <a href="alta-profesional.html">Alta</a> / Formulario técnico</div>
+
+    <div class="hero">
+      <div class="badge">Propiedades técnicas • B2B fileservice</div>
+      <h1>Formulario técnico de pedido</h1>
+      <p class="lead">Borrador visual para capturar datos de trabajo de forma estructurada (estilo ficha técnica). No implementa backend. <b>La validación final depende del archivo original y de las referencias HW/SW</b>.</p>
+    </div>
+
+    <div class="workspace" role="region" aria-label="Formulario técnico">
+      <div class="wsTop">
+        <div class="wsTitle">
+          <div class="tag">Estado: <b>Borrador</b></div>
+          <div class="tag">Canal: <b>Fileservice remoto</b></div>
+          <div class="tag"><b>+49 177 7795542</b> · <b>info@proecufiles.de</b> · <b>24 horas</b> · <b>GMT+1</b></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn outline" type="button" id="btnDraftTop">Guardar borrador</button>
+          <button class="btn primary" type="button" id="btnSendTop">Enviar pedido</button>
+        </div>
+      </div>
+
+      <div class="layout">
+        <aside class="sidebar" aria-label="Secciones">
+          <button class="sideBtn active" data-target="pane-cliente" type="button"><i></i><span>Cliente</span></button>
+          <button class="sideBtn" data-target="pane-vehiculo" type="button"><i></i><span>Vehículo</span></button>
+          <button class="sideBtn" data-target="pane-ecu" type="button"><i></i><span>ECU</span></button>
+          <button class="sideBtn" data-target="pane-motor" type="button"><i></i><span>Motor</span></button>
+          <button class="sideBtn" data-target="pane-custom" type="button"><i></i><span>Custom</span></button>
+        </aside>
+
+        <main class="main">
+          <form id="techForm" novalidate>
+            <div class="mainGrid">
+              <div class="formArea">
+            <!-- Cliente -->
+            <section class="pane active" id="pane-cliente">
+              <div class="paneHeader">
+                <div>
+                  <h2>Cliente</h2>
+                  <p>Identificación del cliente/empresa y trazabilidad interna del pedido.</p>
+                </div>
+              </div>
+              <div class="propGrid">
+                <div class="field">
+                  <label>Nombre cliente / empresa <em>*</em></label>
+                  <input name="cliente_nombre" required placeholder="Taller / empresa">
+                </div>
+                <div class="field">
+                  <label>Nº cliente interno <em>*</em></label>
+                  <input name="cliente_numero" required placeholder="ID interno">
+                </div>
+                <div class="field">
+                  <label>Matrícula <em>*</em></label>
+                  <input name="matricula" required placeholder="0000-XXX">
+                </div>
+                <div class="field">
+                  <label>VIN <em>*</em></label>
+                  <input name="vin" required placeholder="17 caracteres">
+                </div>
+              </div>
+            </section>
+
+            <!-- Vehículo -->
+            <section class="pane" id="pane-vehiculo">
+              <div class="paneHeader">
+                <div>
+                  <h2>Vehículo</h2>
+                  <p>Datos comerciales y de plataforma. Compatibilidad siempre orientativa hasta validar archivo original.</p>
+                </div>
+              </div>
+              <div class="propGrid">
+                <div class="field">
+                  <label>Tipo de vehículo <em>*</em></label>
+                  <select name="vehiculo_tipo" required>
+                    <option value="">Selecciona</option>
+                    <option>Turismo</option>
+                    <option>LCV / Furgoneta</option>
+                    <option>Truck / Industrial</option>
+                    <option>Moto</option>
+                    <option>Marino</option>
+                    <option>Agrícola</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Marca <em>*</em></label>
+                  <input name="vehiculo_marca" required placeholder="Volkswagen / Audi / BMW...">
+                </div>
+                <div class="field">
+                  <label>Serie / plataforma</label>
+                  <input name="vehiculo_plataforma" placeholder="Ej. VAG PQ34">
+                </div>
+                <div class="field">
+                  <label>Generación / build</label>
+                  <input name="vehiculo_generacion" placeholder="Ej. IV / B6 / 8P">
+                </div>
+                <div class="field">
+                  <label>Modelo <em>*</em></label>
+                  <input name="vehiculo_modelo" required placeholder="Golf / A3 / 320d...">
+                </div>
+                <div class="field">
+                  <label>Versión / característica</label>
+                  <input name="vehiculo_version" placeholder="Ej. 1.9 TDI 130 / Quattro / etc.">
+                </div>
+                <div class="field">
+                  <label>Año modelo <em>*</em></label>
+                  <input name="vehiculo_anio" required inputmode="numeric" placeholder="2003">
+                </div>
+              </div>
+            </section>
+
+            <!-- ECU -->
+            <section class="pane" id="pane-ecu">
+              <div class="paneHeader">
+                <div>
+                  <h2>ECU</h2>
+                  <p>Datos de centralita y software. Recomendado: adjuntar el archivo original y etiqueta ECU.</p>
+                </div>
+              </div>
+              <div class="propGrid">
+                <div class="field">
+                  <label>Uso <em>*</em></label>
+                  <select name="ecu_uso" required>
+                    <option value="">Selecciona</option>
+                    <option>Carretera (orientativo)</option>
+                    <option>Track / competición</option>
+                    <option>Diagnóstico / reparación</option>
+                    <option>Pruebas internas</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Fabricante ECU <em>*</em></label>
+                  <input name="ecu_fabricante" required placeholder="Bosch / Continental / Delphi...">
+                </div>
+                <div class="field">
+                  <label>Tipo / familia ECU <em>*</em></label>
+                  <input name="ecu_familia" required placeholder="EDC15P / EDC16U34 / EDC17CP14...">
+                </div>
+                <div class="field">
+                  <label>Nº fabricante</label>
+                  <input name="ecu_num_fabricante" placeholder="P/N fabricante (si aplica)">
+                </div>
+                <div class="field">
+                  <label>Nº ECU</label>
+                  <input name="ecu_numero" placeholder="Nº ECU / ID">
+                </div>
+                <div class="field">
+                  <label>Software</label>
+                  <input name="ecu_software" placeholder="SW ref / calibration id">
+                </div>
+                <div class="field">
+                  <label>Versión software</label>
+                  <input name="ecu_sw_version" placeholder="vX.Y / release">
+                </div>
+                <div class="field">
+                  <label>Checksum</label>
+                  <select name="ecu_checksum">
+                    <option value="">Desconocido</option>
+                    <option>OK</option>
+                    <option>Requiere corrección</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Procesador</label>
+                  <input name="ecu_cpu" placeholder="Ej. Tricore / MPC...">
+                </div>
+
+                <div class="field full">
+                  <div class="helpBar" style="margin-top:0;">
+                    <div><strong>Archivo original:</strong></div>
+                    <div>La adjuntación está en el panel persistente <b>“Archivo original”</b> (siempre visible). Recomendado adjuntar archivo + etiqueta ECU para validar HW/SW.</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Motor -->
+            <section class="pane" id="pane-motor">
+              <div class="paneHeader">
+                <div>
+                  <h2>Motor</h2>
+                  <p>Datos de motor, emisiones y transmisión. Útil para estimación y validación de alcance.</p>
+                </div>
+              </div>
+              <div class="propGrid">
+                <div class="field"><label>Fabricante motor</label><input name="motor_fabricante" placeholder="VAG / BMW / PSA..." /></div>
+                <div class="field"><label>Código motor / nombre</label><input name="motor_codigo" placeholder="ASZ / AMF / OMxxx..." /></div>
+                <div class="field"><label>Tipo motor</label><input name="motor_tipo" placeholder="DI / CR / gasolina..." /></div>
+                <div class="field"><label>Cilindrada</label><input name="motor_cilindrada" placeholder="1896 cc" /></div>
+
+                <div class="field small"><label>Potencia PS</label><input name="motor_ps" inputmode="numeric" placeholder="130" /></div>
+                <div class="field small"><label>Potencia kW</label><input name="motor_kw" inputmode="numeric" placeholder="96" /></div>
+                <div class="field small"><label>Par máximo Nm</label><input name="motor_nm" inputmode="numeric" placeholder="310" /></div>
+                <div class="field"><label>Norma emisiones</label><input name="motor_emisiones" placeholder="Euro 3 / Euro 4 / Euro 6" /></div>
+                <div class="field"><label>Caja / transmisión</label><input name="motor_caja" placeholder="Manual / DSG / Auto" /></div>
+              </div>
+            </section>
+
+            <!-- Custom -->
+            <section class="pane" id="pane-custom">
+              <div class="paneHeader">
+                <div>
+                  <h2>Campos personalizados</h2>
+                  <p>Espacio para codificaciones internas del taller (tickets, prioridades, etiquetas, etc.).</p>
+                </div>
+              </div>
+              <div class="propGrid">
+                <div class="field"><label>User 1</label><input name="user1" placeholder="" /></div>
+                <div class="field"><label>User 2</label><input name="user2" placeholder="" /></div>
+                <div class="field"><label>User 3</label><input name="user3" placeholder="" /></div>
+                <div class="field"><label>User 4</label><input name="user4" placeholder="" /></div>
+                <div class="field"><label>User 5</label><input name="user5" placeholder="" /></div>
+                <div class="field"><label>User 6</label><input name="user6" placeholder="" /></div>
+                <div class="field"><label>User 7</label><input name="user7" placeholder="" /></div>
+
+                <div class="field full">
+                  <label>Notas técnicas</label>
+                  <textarea name="notas_tecnicas" placeholder="Objetivo del trabajo, hardware, síntomas, logs, restricciones, urgencia (si aplica)…"></textarea>
+                </div>
+              </div>
+
+              <div class="helpBar">
+                <div><strong>Ayuda:</strong></div>
+                <div>La disponibilidad final y los plazos se confirman tras revisar el <b>archivo original</b> y las referencias <b>HW/SW</b>. Casos custom, urgencias o referencias poco habituales: <b>bajo consulta</b>.</div>
+              </div>
+
+              <div class="actions">
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <button class="btn outline" type="button" id="btnDraft">Guardar borrador</button>
+                  <button class="btn primary" type="button" id="btnSend">Enviar pedido</button>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <a class="btn outline" href="mailto:info@proecufiles.de">Enviar por Email</a>
+                  <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+                </div>
+              </div>
+            </section>
+              </div>
+
+              <aside class="filePanel" aria-label="Archivo original">
+                <h3>Archivo original</h3>
+                <div class="sub">Arrastra el archivo o selecciónalo. Borrador visual: no sube a backend.</div>
+
+                <div class="dropzone" id="dropzone">
+                  <div>
+                    <div class="t">Zona drag &amp; drop</div>
+                    <div class="d">Formatos habituales: .bin/.ori/.mod/.zip (según herramienta). Si hay dudas, enviar por WhatsApp.</div>
+                  </div>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
+                    <label class="btn outline" for="fileInput">Seleccionar archivo</label>
+                    <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+                  </div>
+                  <input id="fileInput" name="original_file" type="file" accept=".bin,.ori,.mod,.zip,.rar,.7z,.kess,.ktag,.flex,.autotuner,.pcm,.xml,.txt">
+                </div>
+
+                <div id="fileMeta" style="margin-top:10px;color:var(--muted);font-size:.92rem;display:none;"></div>
+
+                <div class="helpBar" style="margin-top:12px;">
+                  <div><strong>Recordatorio:</strong></div>
+                  <div>La validación final depende del <b>archivo original</b> y referencias <b>HW/SW</b> (software + aplicación concreta). Casos custom/urgencias: <b>bajo consulta</b>.</div>
+                </div>
+              </aside>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="k" id="toastK">Aviso</div>
+    <div class="m" id="toastM">Mensaje</div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+        <div>© 2026 ProECU Files • Formulario técnico (borrador)</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="alta-profesional.html" style="color:var(--primary-light);">Alta</a>
+          <a href="ecu-familias.html" style="color:var(--primary-light);">Familias ECU</a>
+          <a href="catalogo.html" style="color:var(--primary-light);">Catálogo</a>
+          <a href="mailto:info@proecufiles.de" style="color:var(--primary-light);">Email</a>
+        </div>
+      </div>
+      <div style="margin-top:10px;color:var(--muted);font-size:.92rem;">+49 177 7795542 · info@proecufiles.de · 24 horas · GMT+1</div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (s, root=document) => root.querySelector(s);
+    const $$ = (s, root=document) => Array.from(root.querySelectorAll(s));
+
+    function showToast(title, msg){
+      $('#toastK').textContent = title;
+      $('#toastM').textContent = msg;
+      const t = $('#toast');
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>t.classList.remove('show'), 3200);
+    }
+
+    // Sidebar navigation
+    const sideButtons = $$('.sideBtn');
+    const panes = $$('.pane');
+    sideButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sideButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const id = btn.getAttribute('data-target');
+        panes.forEach(p => p.classList.toggle('active', p.id === id));
+      });
+    });
+
+    // Dropzone (visual)
+    const dz = $('#dropzone');
+    const fi = $('#fileInput');
+    const meta = $('#fileMeta');
+
+    function setFileInfo(file){
+      if(!file){ meta.style.display='none'; meta.textContent=''; return; }
+      meta.style.display='block';
+      const kb = Math.round(file.size/1024);
+      meta.textContent = `Archivo seleccionado: ${file.name} (${kb} KB).`;
+    }
+
+    dz.addEventListener('dragover', (e)=>{ e.preventDefault(); dz.style.borderColor = 'rgba(59,130,246,.9)'; });
+    dz.addEventListener('dragleave', ()=>{ dz.style.borderColor = 'rgba(96,165,250,.55)'; });
+    dz.addEventListener('drop', (e)=>{
+      e.preventDefault();
+      dz.style.borderColor = 'rgba(96,165,250,.55)';
+      const files = e.dataTransfer.files;
+      const file = files && files[0];
+      if(file){
+        // Intentar sincronizar con el input file (para que FormData incluya el archivo)
+        try {
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          fi.files = dt.files;
+        } catch(_) {}
+        setFileInfo(file);
+        showToast('Archivo', 'Archivo cargado.');
+      }
+    });
+    fi.addEventListener('change', ()=>{ setFileInfo(fi.files[0]); if(fi.files[0]) showToast('Archivo', 'Archivo seleccionado.'); });
+
+    function validateRequired(){
+      const form = $('#techForm');
+      const required = $$('[required]', form);
+      const missing = required.filter(el => !String(el.value||'').trim());
+      missing.forEach(el => el.style.borderColor = 'rgba(239,68,68,.75)');
+      required.filter(el => !missing.includes(el)).forEach(el => el.style.borderColor = 'rgba(255,255,255,.10)');
+      if(missing.length){
+        // Switch to first pane containing missing field
+        const first = missing[0];
+        const pane = first.closest('.pane');
+        if(pane){
+          panes.forEach(p => p.classList.toggle('active', p === pane));
+          sideButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-target') === pane.id));
+        }
+      }
+      return missing.length === 0;
+    }
+
+    const DRAFT_KEY = 'proecu_order_draft_v1';
+
+    function saveDraft(){
+      const form = $('#techForm');
+      const fd = new FormData(form);
+      const obj = {};
+      for (const [k, v] of fd.entries()) {
+        if (v instanceof File) continue; // no guardamos binarios en localStorage
+        obj[k] = v;
+      }
+      try {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify({ saved_at: new Date().toISOString(), fields: obj }));
+        showToast('Borrador guardado', 'Guardado local (este navegador).');
+      } catch (e) {
+        showToast('Borrador', 'No se pudo guardar en localStorage.');
+      }
+    }
+
+    function setSendingState(isSending){
+      const sendBtns = ['#btnSend', '#btnSendTop'].map(sel => $(sel)).filter(Boolean);
+      sendBtns.forEach(b => {
+        b.disabled = !!isSending;
+        b.textContent = isSending ? 'Enviando…' : 'Enviar pedido';
+      });
+      const draftBtns = ['#btnDraft', '#btnDraftTop'].map(sel => $(sel)).filter(Boolean);
+      draftBtns.forEach(b => b.disabled = !!isSending);
+    }
+
+    async function sendOrder(){
+      if(!validateRequired()){
+        showToast('Faltan campos', 'Completa los campos obligatorios marcados con * antes de enviar.');
+        return;
+      }
+
+      if(!fi || !fi.files || !fi.files[0]){
+        showToast('Archivo original', 'Selecciona/adjunta el archivo original antes de enviar.');
+        return;
+      }
+
+      // Determinar URL del backend (puerto 3001)
+      if (location.protocol !== 'http:' && location.protocol !== 'https:') {
+        showToast('Entorno', 'Abre esta página desde un servidor web (http/https) para poder enviar el pedido.');
+        return;
+      }
+
+      const apiBase = `${location.protocol}//${location.hostname}:3001`;
+      const url = `${apiBase}/api/orders`;
+
+      const form = $('#techForm');
+      const fd = new FormData(form);
+
+      setSendingState(true);
+      showToast('Enviando', 'Enviando pedido y adjunto…');
+
+      try {
+        const resp = await fetch(url, { method: 'POST', body: fd });
+        const data = await resp.json().catch(() => ({}));
+
+        if (!resp.ok || !data.success) {
+          const msg = data.message || `Error HTTP ${resp.status}`;
+          showToast('Error', msg);
+          setSendingState(false);
+          return;
+        }
+
+        showToast('Enviado', 'Pedido enviado correctamente (email + copia local).');
+        setSendingState(false);
+      } catch (e) {
+        showToast('Error', 'No se pudo conectar con el servidor (order-mailer en :3001).');
+        setSendingState(false);
+      }
+    }
+
+    // Load draft
+    (function loadDraft(){
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        const fields = parsed.fields || {};
+        const form = $('#techForm');
+        Object.keys(fields).forEach(k => {
+          const el = form.querySelector(`[name="${CSS.escape(k)}"]`);
+          if (!el) return;
+          if (el.tagName === 'SELECT' || el.tagName === 'TEXTAREA' || el.tagName === 'INPUT') {
+            el.value = fields[k];
+          }
+        });
+      } catch (e) {
+        // ignore
+      }
+    })();
+
+    $('#btnDraft').addEventListener('click', saveDraft);
+    $('#btnSend').addEventListener('click', sendOrder);
+    $('#btnDraftTop').addEventListener('click', saveDraft);
+    $('#btnSendTop').addEventListener('click', sendOrder);
+  </script>
+</body>
+</html>

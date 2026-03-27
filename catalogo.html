@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Catálogo de Soluciones | ProECU Files - Fileservice ECU/TCU</title>
+  <meta name="description" content="Catálogo de soluciones probadas de reprogramación ECU/TCU. Consulta compatibilidades, servicios disponibles y tiempos de entrega para tu proyecto.">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --primary-dark: #2563eb;
+      --bg-dark: #0a0a0b;
+      --bg-card: #141416;
+      --bg-card-hover: #1a1a1d;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --border: #27272a;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --whatsapp: #25D366;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-main); background: var(--bg-dark); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+    a { text-decoration: none; color: inherit; }
+    header { background: rgba(10, 10, 11, 0.95); backdrop-filter: blur(10px); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { color: var(--text-main); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 35px; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn { background: var(--primary); color: #fff; padding: 12px 28px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; font-weight: 600; font-size: 0.95rem; }
+    .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-whatsapp { background: var(--whatsapp); }
+    .btn-whatsapp:hover { background: #1ebc57; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .hero { background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f11 50%, var(--bg-dark) 100%); padding: 160px 0 60px; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--primary-light); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 20px; }
+    .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; line-height: 1.1; }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .filters-section { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 30px 0; }
+    .filters-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto; gap: 15px; align-items: end; flex-wrap: wrap; }
+    .filter-group label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .filter-group input, .filter-group select { width: 100%; padding: 12px 14px; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 6px; color: var(--text-main); font-size: 0.9rem; font-family: inherit; transition: border-color 0.3s; }
+    .filter-group input:focus, .filter-group select:focus { outline: none; border-color: var(--primary); }
+    .filter-actions { display: flex; gap: 10px; align-items: flex-end; }
+    .filter-reset { background: transparent; border: 1px solid var(--border); color: var(--text-muted); padding: 12px 20px; border-radius: 6px; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; }
+    .filter-reset:hover { border-color: var(--danger); color: var(--danger); }
+    .results-info { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+    .results-count { color: var(--text-muted); font-size: 0.95rem; }
+    .results-count strong { color: var(--text-main); }
+    .catalog-section { padding: 40px 0 80px; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 20px; }
+    .catalog-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s; }
+    .catalog-card:hover { border-color: var(--primary); background: var(--bg-card-hover); }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+    .card-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge-coche { background: rgba(59, 130, 246, 0.2); color: var(--primary-light); }
+    .badge-camion { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .badge-moto { background: rgba(16, 185, 129, 0.2); color: var(--accent); }
+    .badge-marino { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+    .status-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+    .status-probado { background: rgba(16, 185, 129, 0.2); color: var(--accent); }
+    .status-frecuente { background: rgba(59, 130, 246, 0.2); color: var(--primary-light); }
+    .status-consulta { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 5px; }
+    .card-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .card-field { font-size: 0.85rem; }
+    .card-field-label { color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 3px; }
+    .card-field-value { color: var(--text-main); font-weight: 500; }
+    .card-services { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+    .service-tag { background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
+    .card-price { font-size: 1.1rem; font-weight: 600; color: var(--accent); }
+    .card-price span { font-size: 0.8rem; color: var(--text-muted); font-weight: 400; }
+    .card-time { font-size: 0.85rem; color: var(--text-muted); }
+    .card-action { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: background 0.3s; }
+    .card-action:hover { background: var(--primary-dark); }
+    .featured-section { background: var(--bg-card); padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-tag { display: inline-block; color: var(--primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+    .section-header h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; letter-spacing: -0.5px; }
+    .section-header p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
+    .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .featured-card { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; text-align: center; transition: all 0.3s; }
+    .featured-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .featured-icon { width: 60px; height: 60px; background: rgba(59, 130, 246, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 20px; }
+    .featured-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+    .featured-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .featured-stats { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .featured-stat { text-align: center; }
+    .featured-stat-value { font-size: 1.3rem; font-weight: 700; color: var(--primary-light); }
+    .featured-stat-label { font-size: 0.75rem; color: var(--text-muted); }
+    .info-banner { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 10px; padding: 25px; margin: 40px 0; }
+    .info-banner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .info-banner-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .info-banner-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+    footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 50px 0 25px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 15px; }
+    .footer-col h4 { font-size: 1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+    @media (max-width: 1200px) { .filters-grid { grid-template-columns: 1fr 1fr 1fr; } .filter-actions { grid-column: 1 / -1; justify-content: flex-end; } }
+    @media (max-width: 768px) { .nav-links { display: none; } .hero h1 { font-size: 2rem; } .filters-grid { grid-template-columns: 1fr; } .filter-actions { justify-content: stretch; } .catalog-grid { grid-template-columns: 1fr; } .card-grid { grid-template-columns: 1fr; } .info-banner-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 30px; } .featured-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">ProECU<span>Files</span></div>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#proceso">Proceso</a></li>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <a href="https://wa.me/491777795542" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">📚 Base de datos técnica</span>
+      <h1>Catálogo de Soluciones<br><span>Probadas</span></h1>
+      <p>Consulta nuestra base de datos de calibraciones desarrolladas y testadas. Filtra por vehículo, ECU o servicio para verificar compatibilidad y disponibilidad.</p>
+      <div class="hero-cta">
+        <a href="https://wa.me/491777795542" class="btn btn-whatsapp" target="_blank" rel="noopener">📱 Consultar Disponibilidad</a>
+        <a href="#catalogo" class="btn btn-outline">Ver Catálogo</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 40px 0;">
+    <div class="container">
+      <div class="info-banner" style="margin: 0;">
+        <div class="info-banner-grid">
+          <div class="info-banner-item">
+            <h4>🧩 Familia ECU: Bosch EDC15P / EDC15P+</h4>
+            <p>Acceso directo a la sección técnica de EDC15P (página madre) y sus variantes por motor. Contenido orientado a fileservice B2B para talleres y preparadores.</p>
+            <p style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <a class="btn btn-outline btn-sm" href="ecu-edc15p.html">Ver familia EDC15P</a>
+              <a class="btn btn-whatsapp btn-sm" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-outline btn-sm" href="mailto:info@proecufiles.de">Email</a>
+            </p>
+          </div>
+          <div class="info-banner-item">
+            <h4>📌 Variantes rápidas</h4>
+            <p style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+              <a class="service-tag" href="ecu-edc15p-14-tdi.html">1.4 TDI</a>
+              <a class="service-tag" href="ecu-edc15p-19-tdi-100-101.html">1.9 TDI 100/101</a>
+              <a class="service-tag" href="ecu-edc15p-19-tdi-115-116.html">1.9 TDI 115/116</a>
+              <a class="service-tag" href="ecu-edc15p-19-tdi-130-131.html">1.9 TDI 130/131</a>
+              <a class="service-tag" href="ecu-edc15p-19-tdi-150.html">1.9 TDI 150</a>
+              <a class="service-tag" href="ecu-edc15p-19-tdi-160.html">1.9 TDI 160</a>
+              <a class="service-tag" href="ecu-edc15p-25-tdi.html">2.5 TDI</a>
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 12px;">WhatsApp [+49 177 7795542] · Email info@proecufiles.de · Horario 24 horas · Zona GMT+1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 30px 0 10px;">
+    <div class="container">
+      <div class="info-banner" style="margin: 0;">
+        <div class="info-banner-grid">
+          <div class="info-banner-item">
+            <h4>🧩 Familias ECU (hub) + Bosch EDC16 / EDC17</h4>
+            <p style="margin-top: 10px;"><a class="btn btn-outline" href="ecu-familias.html">Abrir hub de Familias ECU</a></p>
+            <p>Capa de catálogo por familias ECU, con navegación técnica por subfamilias. Enfoque 100% fileservice remoto B2B.</p>
+            <p style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+              <a class="btn btn-outline" href="ecu-edc16.html">Bosch EDC16</a>
+              <a class="btn btn-outline" href="ecu-edc17.html">Bosch EDC17</a>
+              <a class="btn btn-whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="btn btn-outline" href="alta-profesional.html">Alta profesional</a>
+            </p>
+          </div>
+          <div class="info-banner-item">
+            <h4>📌 Subfamilias prioritarias</h4>
+            <p style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+              <a class="service-tag" href="ecu-edc16u34.html">EDC16U34</a>
+              <a class="service-tag" href="ecu-edc16c39.html">EDC16C39</a>
+              <a class="service-tag" href="ecu-edc16c35.html">EDC16C35</a>
+              <a class="service-tag" href="ecu-edc16c1.html">EDC16C1</a>
+              <a class="service-tag" href="ecu-edc16c9.html">EDC16C9</a>
+              <a class="service-tag" href="ecu-edc17cp20.html">EDC17CP20</a>
+              <a class="service-tag" href="ecu-edc17cp14.html">EDC17CP14</a>
+              <a class="service-tag" href="ecu-edc17c46.html">EDC17C46</a>
+              <a class="service-tag" href="ecu-edc17c64.html">EDC17C64</a>
+              <a class="service-tag" href="ecu-edc17cv41.html">EDC17CV41</a>
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 12px;">Compatibilidad orientativa. Validación final por archivo original + HW/SW + software + aplicación concreta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filters-section">
+    <div class="container">
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label for="search">Buscar</label>
+          <input type="text" id="search" placeholder="Marca, modelo, motor, ECU...">
+        </div>
+        <div class="filter-group">
+          <label for="tipo">Tipo vehículo</label>
+          <select id="tipo">
+            <option value="">Todos</option>
+            <option value="coche">Coche</option>
+            <option value="camion">Camión</option>
+            <option value="moto">Moto</option>
+            <option value="marino">Marino</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="marca">Marca</label>
+          <select id="marca">
+            <option value="">Todas</option>
+            <option value="volkswagen">Volkswagen</option>
+            <option value="audi">Audi</option>
+            <option value="bmw">BMW</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="ford">Ford</option>
+            <option value="opel">Opel</option>
+            <option value="renault">Renault</option>
+            <option value="peugeot">Peugeot</option>
+            <option value="citroen">Citroën</option>
+            <option value="toyota">Toyota</option>
+            <option value="nissan">Nissan</option>
+            <option value="volvo">Volvo</option>
+            <option value="iveco">Iveco</option>
+            <option value="man">MAN</option>
+            <option value="scania">Scania</option>
+            <option value="yamaha">Yamaha</option>
+            <option value="honda">Honda</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="servicio">Servicio</label>
+          <select id="servicio">
+            <option value="">Todos</option>
+            <option value="stage1">Stage 1</option>
+            <option value="stage2">Stage 2</option>
+            <option value="tcu">TCU/DSG</option>
+            <option value="dpf">DPF/FAP</option>
+            <option value="egr">EGR</option>
+            <option value="adblue">AdBlue</option>
+            <option value="immoff">Immo OFF</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="ecu">ECU Brand</label>
+          <select id="ecu">
+            <option value="">Todas</option>
+            <option value="bosch">Bosch</option>
+            <option value="siemens">Siemens/Continental</option>
+            <option value="delphi">Delphi</option>
+            <option value="denso">Denso</option>
+            <option value="magneti">Magneti Marelli</option>
+            <option value="vdo">VDO</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button class="filter-reset" onclick="resetFilters()">Limpiar filtros</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="catalogo" class="catalog-section">
+    <div class="container">
+      <div class="results-info">
+        <div class="results-count">Mostrando <strong id="count">0</strong> de <strong id="total">0</strong> soluciones</div>
+      </div>
+      
+      <div class="catalog-grid" id="catalog">
+        <!-- COCHE - VAG Group -->
+        <div class="catalog-card" data-tipo="coche" data-marca="volkswagen" data-servicio="stage1,stage2,dpf,egr" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-probado">Probado</span>
+          </div>
+          <h3 class="card-title">Volkswagen Golf VII 2.0 TDI 150 CV</h3>
+          <p class="card-subtitle">2013-2020 | EA288 | MQB</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">CRBC, CRBB</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17 U64</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">Stage 2</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+            <span class="service-tag">AdBlue OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Stage 1: 49 € <span>(turismos)</span></div>
+            <div class="card-time">⏱️ 2-4h</div>
+            <button class="card-action" onclick="consultar('VW Golf VII 2.0 TDI')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="coche" data-marca="audi" data-servicio="stage1,stage2,tcu" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-frecuente">Frecuente</span>
+          </div>
+          <h3 class="card-title">Audi A4 B9 2.0 TDI 190 CV Quattro</h3>
+          <p class="card-subtitle">2016-2023 | EA288 Evo | MLB Evo</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">DETA, DETB</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17 CP64</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">Stage 2</span>
+            <span class="service-tag">TCU DSG</span>
+            <span class="service-tag">Lanzamiento</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 349€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 2-4h</div>
+            <button class="card-action" onclick="consultar('Audi A4 B9 2.0 TDI')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="coche" data-marca="bmw" data-servicio="stage1,stage2,dpf,adblue" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-frecuente">Frecuente</span>
+          </div>
+          <h3 class="card-title">BMW Serie 3 G20 320d 190 CV</h3>
+          <p class="card-subtitle">2019-2026 | B47D20 | CLAR</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">B47D20B</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17 C67</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">Stage 2</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">AdBlue OFF</span>
+            <span class="service-tag">EGR OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 399€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 4-8h</div>
+            <button class="card-action" onclick="consultar('BMW 320d G20')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="coche" data-marca="mercedes" data-servicio="stage1,stage2,tcu,dpf" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-frecuente">Frecuente</span>
+          </div>
+          <h3 class="card-title">Mercedes Clase C W205 C220d 194 CV</h3>
+          <p class="card-subtitle">2014-2021 | OM654 | MRA</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">OM654</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17 C67</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">Stage 2</span>
+            <span class="service-tag">TCU 9G-Tronic</span>
+            <span class="service-tag">DPF OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 399€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 4-8h</div>
+            <button class="card-action" onclick="consultar('Mercedes C220d W205')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="coche" data-marca="ford" data-servicio="stage1,dpf,egr" data-ecu="siemens">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-probado">Probado</span>
+          </div>
+          <h3 class="card-title">Ford Focus III 2.0 TDCi 150 CV</h3>
+          <p class="card-subtitle">2011-2018 | DW10 | C1 MCA</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">XWDA, XWDB</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Siemens SID208</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Siemens/Continental</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+            <span class="service-tag">Switchable</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 279€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 2-4h</div>
+            <button class="card-action" onclick="consultar('Ford Focus 2.0 TDCi')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="coche" data-marca="peugeot" data-servicio="stage1,dpf,egr,adblue" data-ecu="siemens">
+          <div class="card-header">
+            <span class="card-badge badge-coche">Coche</span>
+            <span class="status-badge status-frecuente">Frecuente</span>
+          </div>
+          <h3 class="card-title">Peugeot 308 II 2.0 BlueHDi 150 CV</h3>
+          <p class="card-subtitle">2014-2021 | DW10 FD | EMP2</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">AHX, AHY</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Siemens SID208</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Siemens/Continental</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+            <span class="service-tag">AdBlue OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 279€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 2-4h</div>
+            <button class="card-action" onclick="consultar('Peugeot 308 2.0 BlueHDi')">Consultar</button>
+          </div>
+        </div>
+
+        <!-- CAMION -->
+        <div class="catalog-card" data-tipo="camion" data-marca="iveco" data-servicio="stage1,dpf,egr,adblue" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-camion">Camión</span>
+            <span class="status-badge status-frecuente">Frecuente</span>
+          </div>
+          <h3 class="card-title">Iveco Daily 3.0 HPT 170 CV</h3>
+          <p class="card-subtitle">2014-2026 | F1C | Euro 6</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">F1C Euro 6</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17 C69</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+            <span class="service-tag">AdBlue OFF</span>
+            <span class="service-tag">Speed Limiter</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 449€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 4-8h</div>
+            <button class="card-action" onclick="consultar('Iveco Daily 3.0')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="camion" data-marca="volvo" data-servicio="stage1,dpf,egr" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-camion">Camión</span>
+            <span class="status-badge status-probado">Probado</span>
+          </div>
+          <h3 class="card-title">Volvo FH 460 D13K Euro 6</h3>
+          <p class="card-subtitle">2013-2026 | D13K | Euro 6</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">D13K460</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC7</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+            <span class="service-tag">VGT Limit</span>
+            <span class="service-tag">Speed Limiter</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Consultar <span>(Flotas)</span></div>
+            <div class="card-time">⏱️ 8-24h</div>
+            <button class="card-action" onclick="consultar('Volvo FH D13K')">Consultar</button>
+          </div>
+        </div>
+
+        <div class="catalog-card" data-tipo="camion" data-marca="man" data-servicio="stage1,dpf,adblue" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-camion">Camión</span>
+            <span class="status-badge status-consulta">Bajo Consulta</span>
+          </div>
+          <h3 class="card-title">MAN TGX 18.480 D26 Euro 6</h3>
+          <p class="card-subtitle">2014-2026 | D2676 | Euro 6</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">D2676 LOH</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC7 CP16</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">AdBlue OFF</span>
+            <span class="service-tag">Speed Limiter</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Consultar</div>
+            <div class="card-time">⏱️ 24-48h</div>
+            <button class="card-action" onclick="consultar('MAN TGX D26')">Consultar</button>
+          </div>
+        </div>
+
+        <!-- MOTO -->
+        <div class="catalog-card" data-tipo="moto" data-marca="yamaha" data-servicio="stage1,stage2" data-ecu="denso">
+          <div class="card-header">
+            <span class="card-badge badge-moto">Moto</span>
+            <span class="status-badge status-probado">Probado</span>
+          </div>
+          <h3 class="card-title">Yamaha MT-07 689cc</h3>
+          <p class="card-subtitle">2014-2026 | CP07 | Euro 5</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">CP07</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Gasolina</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Denso 16-bit</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Denso</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">Stage 2</span>
+            <span class="service-tag">Pop & Bang</span>
+            <span class="service-tag">Speed Limiter OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Desde 349€ <span>(Stage 1)</span></div>
+            <div class="card-time">⏱️ 4-8h</div>
+            <button class="card-action" onclick="consultar('Yamaha MT-07')">Consultar</button>
+          </div>
+        </div>
+
+        <!-- MARINO -->
+        <div class="catalog-card" data-tipo="marino" data-marca="volvo" data-servicio="stage1,dpf" data-ecu="bosch">
+          <div class="card-header">
+            <span class="card-badge badge-marino">Marino</span>
+            <span class="status-badge status-consulta">Bajo Consulta</span>
+          </div>
+          <h3 class="card-title">Volvo Penta D6-435</h3>
+          <p class="card-subtitle">2015-2026 | 5.7L | Euro 6</p>
+          <div class="card-grid">
+            <div class="card-field"><span class="card-field-label">Código Motor</span><span class="card-field-value">D6-435</span></div>
+            <div class="card-field"><span class="card-field-label">Combustible</span><span class="card-field-value">Diésel</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Type</span><span class="card-field-value">Bosch EDC17</span></div>
+            <div class="card-field"><span class="card-field-label">ECU Brand</span><span class="card-field-value">Bosch</span></div>
+          </div>
+          <div class="card-services">
+            <span class="service-tag">Stage 1</span>
+            <span class="service-tag">DPF OFF</span>
+            <span class="service-tag">EGR OFF</span>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">Consultar</div>
+            <div class="card-time">⏱️ 24-48h</div>
+            <button class="card-action" onclick="consultar('Volvo Penta D6-435')">Consultar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Banner -->
+      <div class="info-banner">
+        <div class="info-banner-grid">
+          <div class="info-banner-item">
+            <h4>⚠️ Aviso de disponibilidad</h4>
+            <p>Este catálogo es orientativo. La disponibilidad final se confirma tras recibir referencia exacta de ECU, software actual, archivo original y tipo de servicio solicitado. Algunas versiones pueden requerir desarrollo específico bajo consulta.</p>
+          </div>
+          <div class="info-banner-item">
+            <h4>🔒 Servicios profesionales</h4>
+            <p>Determinadas soluciones avanzadas o sensibles (DPF OFF, AdBlue OFF, Immo OFF) se gestionan exclusivamente bajo consulta profesional y están sujetas a legislación local. El taller instalador es responsable del uso final del vehículo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Platforms -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Destacados</span>
+        <h2>Plataformas Frecuentes</h2>
+        <p>Las familias de motores y ECUs más solicitadas en nuestro fileservice. Alta disponibilidad y tiempos de entrega reducidos.</p>
+      </div>
+      <div class="featured-grid">
+        <div class="featured-card" style="border-color: var(--primary); background: rgba(59, 130, 246, 0.05);">
+          <div class="featured-icon">🔧</div>
+          <h3>Bosch EDC15P / EDC15P+</h3>
+          <p>1.4/1.9/2.5 TDI, VAG Group</p>
+          <div class="featured-stats">
+            <div class="featured-stat"><div class="featured-stat-value">+600</div><div class="featured-stat-label">Referencias</div></div>
+            <div class="featured-stat"><div class="featured-stat-value">2-8h</div><div class="featured-stat-label">Entrega</div></div>
+          </div>
+          <a href="ecu-edc15p.html" class="btn btn-outline" style="margin-top: 20px; width: 100%;">Ver Familia EDC15P →</a>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">🚗</div>
+          <h3>VAG 1.9/2.0 TDI</h3>
+          <p>EA188, EA288, EDC16/17</p>
+          <div class="featured-stats">
+            <div class="featured-stat"><div class="featured-stat-value">+500</div><div class="featured-stat-label">Archivos</div></div>
+            <div class="featured-stat"><div class="featured-stat-value">2-4h</div><div class="featured-stat-label">Entrega</div></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">🏎️</div>
+          <h3>BMW B47/B57</h3>
+          <p>EDC17, Serie 3/5/X3/X5</p>
+          <div class="featured-stats">
+            <div class="featured-stat"><div class="featured-stat-value">+200</div><div class="featured-stat-label">Archivos</div></div>
+            <div class="featured-stat"><div class="featured-stat-value">4-8h</div><div class="featured-stat-label">Entrega</div></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">⭐</div>
+          <h3>Mercedes OM654</h3>
+          <p>EDC17 C67, Clase C/E/GLC</p>
+          <div class="featured-stats">
+            <div class="featured-stat"><div class="featured-stat-value">+150</div><div class="featured-stat-label">Archivos</div></div>
+            <div class="featured-stat"><div class="featured-stat-value">4-8h</div><div class="featured-stat-label">Entrega</div></div>
+          </div>
+        </div>
+        <div class="featured-card">
+          <div class="featured-icon">🚚</div>
+          <h3>Iveco F1C Euro 6</h3>
+          <p>Daily, EDC17 C69</p>
+          <div class="featured-stats">
+            <div class="featured-stat"><div class="featured-stat-value">+100</div><div class="featured-stat-label">Archivos</div></div>
+            <div class="featured-stat"><div class="featured-stat-value">4-8h</div><div class="featured-stat-label">Entrega</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDC15P Family Section -->
+  <section style="background: var(--bg-card); border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Familia ECU</span>
+        <h2>Bosch EDC15P / EDC15P+</h2>
+        <p>Una de las centralitas diésel más extendidas del mercado. Calibraciones disponibles para múltiples variantes de motor.</p>
+      </div>
+      <div class="variants-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.4 TDI</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">3 cilindros | 70-80 CV</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AMF</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">BAY</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">BNM</span>
+          </div>
+          <a href="ecu-edc15p-14-tdi.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.9 TDI 100/101</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">4 cilindros | Entrada</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">ATD</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AXR</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AVB</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-100-101.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.9 TDI 115/116</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">4 cilindros | Intermedio</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AJM</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AUY</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-115-116.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.9 TDI 130/131</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">4 cilindros | Más común</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">ASZ</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AVF</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AWX</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-130-131.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.9 TDI 150</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">4 cilindros | Alto rendimiento</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">ARL</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">BTB</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-150.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">1.9 TDI 160</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">4 cilindros | Biturbo</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">BPX</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">BUK</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-160.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+        <div class="variant-card" style="background: var(--bg-dark); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s;">
+          <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">2.5 TDI V6</h3>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block; margin-bottom: 15px;">6 cilindros V6 | 155-180 CV</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AHY</span>
+            <span style="background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">AXG</span>
+          </div>
+          <a href="ecu-edc15p-25-tdi.html" style="color: var(--primary); font-weight: 500; font-size: 0.9rem;">Ver detalles →</a>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="ecu-edc15p.html" class="btn" style="display: inline-flex; align-items: center; gap: 10px;">
+          🔧 Ver Página Completa EDC15P
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">ProECU<span>Files</span></div>
+          <p>Fileservice profesional de calibraciones ECU/TCU para talleres y preparadores. Calidad, rapidez y soporte técnico en cada archivo.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="index.html#servicios">Stage 1</a></li>
+            <li><a href="index.html#servicios">Stage 2</a></li>
+            <li><a href="index.html#servicios">TCM / TCU</a></li>
+            <li><a href="index.html#servicios">DPF / EGR / AdBlue</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="index.html#proceso">Cómo funciona</a></li>
+            <li><a href="index.html#ventajas">Ventajas</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html#contacto">Solicitar acceso</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="condiciones-fileservice.html">Condiciones fileservice</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ProECU Files. Servicio exclusivo para profesionales. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const filters = { search: document.getElementById('search'), tipo: document.getElementById('tipo'), marca: document.getElementById('marca'), servicio: document.getElementById('servicio'), ecu: document.getElementById('ecu') };
+    const cards = document.querySelectorAll('.catalog-card');
+    const countEl = document.getElementById('count');
+    const totalEl = document.getElementById('total');
+    totalEl.textContent = cards.length;
+    function filterCards() {
+      let visible = 0;
+      cards.forEach(card => {
+        const matchSearch = !filters.search.value || card.textContent.toLowerCase().includes(filters.search.value.toLowerCase());
+        const matchTipo = !filters.tipo.value || card.dataset.tipo === filters.tipo.value;
+        const matchMarca = !filters.marca.value || card.dataset.marca === filters.marca.value;
+        const matchServicio = !filters.servicio.value || card.dataset.servicio.includes(filters.servicio.value);
+        const matchEcu = !filters.ecu.value || card.dataset.ecu === filters.ecu.value;
+        if (matchSearch && matchTipo && matchMarca && matchServicio && matchEcu) { card.style.display = ''; visible++; } else { card.style.display = 'none'; }
+      });
+      countEl.textContent = visible;
+    }
+    function resetFilters() { filters.search.value = ''; filters.tipo.value = ''; filters.marca.value = ''; filters.servicio.value = ''; filters.ecu.value = ''; filterCards(); }
+    function consultar(vehicle) { const msg = encodeURIComponent(`Hola, consulto por: ${vehicle}. ¿Disponibilidad y precio?`); window.open(`https://wa.me/491777795542?text=${msg}`, '_blank'); }
+    Object.values(filters).forEach(filter => { filter.addEventListener('input', filterCards); filter.addEventListener('change', filterCards); });
+    filterCards();
+  </script>
+</body>
+</html>
+ml>

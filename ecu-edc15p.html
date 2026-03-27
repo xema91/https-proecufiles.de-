@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bosch EDC15P / EDC15P+ Fileservice | ProECU Files - Servicio Profesional ECU</title>
+  <meta name="description" content="Fileservice profesional Bosch EDC15P y EDC15P+. Calibraciones Stage 1, Stage 2, soluciones DPF/EGR para talleres. Servicio remoto B2B con entrega rápida.">
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --primary-dark: #2563eb;
+      --bg-dark: #0a0a0b;
+      --bg-card: #141416;
+      --bg-card-hover: #1a1a1d;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --border: #27272a;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --whatsapp: #25D366;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: var(--text-main); background: var(--bg-dark); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    a { text-decoration: none; color: inherit; }
+    header { background: rgba(10, 10, 11, 0.95); backdrop-filter: blur(10px); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { color: var(--text-main); font-size: 1.5rem; font-weight: 700; }
+    .logo span { color: var(--primary); }
+    .nav-links { display: flex; gap: 35px; list-style: none; }
+    .nav-links a { color: var(--text-muted); font-size: 0.95rem; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn { background: var(--primary); color: #fff; padding: 12px 28px; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; font-weight: 600; font-size: 0.95rem; }
+    .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-whatsapp { background: var(--whatsapp); }
+    .btn-whatsapp:hover { background: #1ebc57; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    
+    .breadcrumb { padding: 100px 0 20px; font-size: 0.9rem; color: var(--text-muted); }
+    .breadcrumb a { color: var(--primary); }
+    .breadcrumb span { margin: 0 10px; }
+    
+    .hero { background: linear-gradient(180deg, var(--bg-dark) 0%, #0f0f11 50%, var(--bg-dark) 100%); padding: 80px 0; text-align: center; }
+    .hero-badge { display: inline-block; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--primary-light); padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 20px; }
+    .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px; line-height: 1.7; }
+    .hero-cta { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    
+    section { padding: 70px 0; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-tag { display: inline-block; color: var(--primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+    .section-header h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; }
+    .section-header p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
+    
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 50px; }
+    .info-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 30px; }
+    .info-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: var(--primary-light); }
+    .info-card p { color: var(--text-muted); line-height: 1.7; }
+    .info-card ul { list-style: none; margin-top: 15px; }
+    .info-card li { padding: 8px 0; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; }
+    .info-card li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+    
+    .variants-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .variant-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 25px; transition: all 0.3s; }
+    .variant-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .variant-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+    .variant-card .variant-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; display: block; }
+    .variant-card .variant-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+    .spec-tag { background: rgba(59, 130, 246, 0.15); color: var(--primary-light); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; }
+    .variant-card a { color: var(--primary); font-weight: 500; font-size: 0.9rem; }
+    .variant-card a:hover { text-decoration: underline; }
+    
+    .references-section { background: var(--bg-card); padding: 70px 0; }
+    .references-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+    .ref-item { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 6px; padding: 12px; text-align: center; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.85rem; color: var(--text-muted); transition: all 0.3s; }
+    .ref-item:hover { border-color: var(--primary); color: var(--primary-light); }
+    
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 25px; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 25px; }
+    .faq-item h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+    .faq-item p { color: var(--text-muted); line-height: 1.7; }
+    
+    .cta { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
+    .cta h2 { font-size: 2.2rem; font-weight: 700; margin-bottom: 15px; }
+    .cta p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    
+    .info-banner { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 25px; margin: 40px 0; }
+    .info-banner p { color: var(--text-muted); line-height: 1.7; }
+    .info-banner strong { color: var(--warning); }
+    
+    footer { background: var(--bg-card); border-top: 1px solid var(--border); padding: 50px 0 25px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+    .footer-brand p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 15px; }
+    .footer-col h4 { font-size: 1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 12px; }
+    .footer-col a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+    
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+      .references-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">ProECU<span>Files</span></div>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="ecu-familias.html">Familias ECU</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <a href="https://wa.me/491777795542" class="btn btn-whatsapp" target="_blank" rel="noopener">WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Inicio</a> <span>/</span> <a href="catalogo.html">Catálogo</a> <span>/</span> Bosch EDC15P
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">🔧 Fileservice B2B</span>
+      <h1>Bosch <span>EDC15P / EDC15P+</span></h1>
+      <p>Fileservice profesional para la familia EDC15P de Bosch. Una de las centralitas diésel más extendidas del mercado. Calibraciones Stage 1, Stage 2 y soluciones técnicas para talleres y preparadores.</p>
+      <div class="hero-cta">
+        <a href="https://wa.me/491777795542" class="btn btn-whatsapp" target="_blank" rel="noopener">📱 Consultar por WhatsApp</a>
+        <a href="#variantes" class="btn btn-outline">Ver Variantes</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Familia ECU</span>
+        <h2>Sobre Bosch EDC15P / EDC15P+</h2>
+        <p>La familia EDC15P de Bosch equipó numerosos motores TDI del Grupo Volkswagen entre 1997 y 2008. Una plataforma madura con amplio soporte y calibraciones disponibles.</p>
+      </div>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>📋 Descripción Técnica</h3>
+          <p>La EDC15P es una centralita de inyección diésel de Bosch con procesador de 32 bits. La variante EDC15P+ incorpora mejoras en gestión de emisiones y diagnóstico OBD. Ampliamente utilizada en motores 1.4 TDI, 1.9 TDI y 2.5 TDI.</p>
+        </div>
+        <div class="info-card">
+          <h3>🔌 Conexión y Lectura</h3>
+          <p>Lectura/escritura vía OBD en la mayoría de aplicaciones. Algunos casos requieren apertura de ECU. Compatible con herramientas profesionales: Alientech Kess/K-Tag, Magic Motorsport, Autotuner, PCMflash.</p>
+        </div>
+        <div class="info-card">
+          <h3>⚙️ Servicios Disponibles</h3>
+          <ul>
+            <li>Stage 1 - Optimización estándar</li>
+            <li>Stage 2 - Con modificaciones hardware</li>
+            <li>Lectura de archivo original</li>
+            <li>DPF OFF / EGR OFF (bajo consulta)</li>
+            <li>AdBlue OFF (según aplicación)</li>
+            <li>Immo OFF (bajo consulta)</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>📊 Ventajas del Fileservice</h3>
+          <ul>
+            <li>Entrega en 2-8 horas laborables</li>
+            <li>Checksum automático corregido</li>
+            <li>Soporte técnico post-venta</li>
+            <li>Precios de fileservice B2B</li>
+            <li>Archivos personalizados por motor</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-banner">
+        <p><strong>⚠️ Nota importante:</strong> Esta página presenta la familia EDC15P / EDC15P+ con fines informativos. La compatibilidad final se confirma tras recibir el archivo original, referencia de hardware, número de software y aplicación concreta del vehículo. No todas las soluciones están disponibles para todas las referencias.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="variantes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Variantes</span>
+        <h2>Motores y Aplicaciones</h2>
+        <p>Selecciona la variante de motor para acceder a información específica de calibración, códigos de motor frecuentes y servicios disponibles.</p>
+      </div>
+      
+      <div class="variants-grid">
+        <div class="variant-card">
+          <h3>1.4 TDI</h3>
+          <span class="variant-subtitle">3 cilindros | 70-80 CV</span>
+          <div class="variant-specs">
+            <span class="spec-tag">AMF</span>
+            <span class="spec-tag">BAY</span>
+            <span class="spec-tag">BNM</span>
+            <span class="spec-tag">BNV</span>
+          </div>
+          <a href="ecu-edc15p-14-tdi.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>1.9 TDI 100/101 CV</h3>
+          <span class="variant-subtitle">4 cilindros | Entrada</span>
+          <div class="variant-specs">
+            <span class="spec-tag">ATD</span>
+            <span class="spec-tag">AXR</span>
+            <span class="spec-tag">AVB</span>
+            <span class="spec-tag">BMT</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-100-101.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>1.9 TDI 115/116 CV</h3>
+          <span class="variant-subtitle">4 cilindros | Intermedio</span>
+          <div class="variant-specs">
+            <span class="spec-tag">AJM</span>
+            <span class="spec-tag">ATJ</span>
+            <span class="spec-tag">AUY</span>
+            <span class="spec-tag">BVK</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-115-116.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>1.9 TDI 130/131 CV</h3>
+          <span class="variant-subtitle">4 cilindros | PD más común</span>
+          <div class="variant-specs">
+            <span class="spec-tag">ASZ</span>
+            <span class="spec-tag">AVF</span>
+            <span class="spec-tag">AWX</span>
+            <span class="spec-tag">BLT</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-130-131.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>1.9 TDI 150 CV</h3>
+          <span class="variant-subtitle">4 cilindros | Alto rendimiento</span>
+          <div class="variant-specs">
+            <span class="spec-tag">ARL</span>
+            <span class="spec-tag">BTB</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-150.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>1.9 TDI 160 CV</h3>
+          <span class="variant-subtitle">4 cilindros | Biturbo</span>
+          <div class="variant-specs">
+            <span class="spec-tag">BPX</span>
+            <span class="spec-tag">BUK</span>
+          </div>
+          <a href="ecu-edc15p-19-tdi-160.html">Ver detalles →</a>
+        </div>
+        <div class="variant-card">
+          <h3>2.5 TDI V6</h3>
+          <span class="variant-subtitle">6 cilindros | 155-180 CV</span>
+          <div class="variant-specs">
+            <span class="spec-tag">AHY</span>
+            <span class="spec-tag">AXG</span>
+          </div>
+          <a href="ecu-edc15p-25-tdi.html">Ver detalles →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="references-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Referencias</span>
+        <h2>Referencias Familia EDC15P</h2>
+        <p>Listado de referencias frecuentes pertenecientes a la familia EDC15P / EDC15P+. Este listado es orientativo y no garantiza compatibilidad sin validación previa del archivo.</p>
+      </div>
+      
+      <div class="references-grid">
+        <div class="ref-item">038 906 019 AJ</div>
+        <div class="ref-item">038 906 019 AM</div>
+        <div class="ref-item">038 906 019 AR</div>
+        <div class="ref-item">038 906 019 CD</div>
+        <div class="ref-item">038 906 019 CK</div>
+        <div class="ref-item">038 906 019 FG</div>
+        <div class="ref-item">038 906 019 FP</div>
+        <div class="ref-item">038 906 019 FT</div>
+        <div class="ref-item">038 906 019 GC</div>
+        <div class="ref-item">038 906 019 GD</div>
+        <div class="ref-item">038 906 019 GK</div>
+        <div class="ref-item">038 906 019 GL</div>
+        <div class="ref-item">038 906 019 H</div>
+        <div class="ref-item">038 906 019 HJ</div>
+        <div class="ref-item">038 906 019 HT</div>
+        <div class="ref-item">038 906 019 J</div>
+        <div class="ref-item">038 906 019 JL</div>
+        <div class="ref-item">038 906 019 JQ</div>
+        <div class="ref-item">038 906 019 JT</div>
+        <div class="ref-item">038 906 019 KC</div>
+        <div class="ref-item">038 906 019 KD</div>
+        <div class="ref-item">038 906 019 KG</div>
+        <div class="ref-item">038 906 019 KH</div>
+        <div class="ref-item">038 906 019 KJ</div>
+        <div class="ref-item">038 906 019 KP</div>
+        <div class="ref-item">038 906 019 KR</div>
+        <div class="ref-item">038 906 019 KT</div>
+        <div class="ref-item">038 906 019 LA</div>
+        <div class="ref-item">038 906 019 LB</div>
+        <div class="ref-item">038 906 019 LF</div>
+        <div class="ref-item">038 906 019 LJ</div>
+        <div class="ref-item">038 906 019 LM</div>
+        <div class="ref-item">038 906 019 LQ</div>
+        <div class="ref-item">038 906 019 LR</div>
+        <div class="ref-item">038 906 019 MT</div>
+        <div class="ref-item">038 906 019 NA</div>
+        <div class="ref-item">038 906 019 NB</div>
+        <div class="ref-item">038 906 019 NC</div>
+        <div class="ref-item">038 906 019 NE</div>
+        <div class="ref-item">038 906 019 NF</div>
+        <div class="ref-item">038 906 019 NJ</div>
+        <div class="ref-item">038 906 019 NL</div>
+        <div class="ref-item">038 906 019 NN</div>
+        <div class="ref-item">038 906 019 NQ</div>
+        <div class="ref-item">038 906 019 NR</div>
+        <div class="ref-item">038 906 019 NS</div>
+        <div class="ref-item">038 906 019 PA</div>
+        <div class="ref-item">038 906 019 PB</div>
+        <div class="ref-item">038 906 019 Q</div>
+        <div class="ref-item">038 906 019 R</div>
+        <div class="ref-item">038 998 019</div>
+        <div class="ref-item">038906019FK</div>
+        <div class="ref-item">045 906 019</div>
+        <div class="ref-item">045 906 019 AA</div>
+      </div>
+      
+      <div class="info-banner" style="margin-top: 30px;">
+        <p><strong>⚠️ Validación requerida:</strong> Las referencias anteriores pertenecen a la familia EDC15P / EDC15P+. La compatibilidad final se confirma según archivo original, referencia de hardware (HW), número de software (SW), y aplicación concreta del vehículo. Contacta para validar tu caso específico antes de enviar archivos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">FAQ</span>
+        <h2>Preguntas Frecuentes EDC15P</h2>
+        <p>Información técnica y operativa específica para esta familia de centralitas.</p>
+      </div>
+      
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>¿Se puede leer/escribir vía OBD?</h3>
+          <p>En la mayoría de aplicaciones sí, la EDC15P permite lectura y escritura vía OBD con herramientas profesionales. Algunos vehículos pueden requerir apertura de ECU según año y modelo. Consulta antes de intervenir.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Qué herramientas son compatibles?</h3>
+          <p>Alientech Kess V2 / K-Tag, Magic Motorsport Flex / BDM100, Autotuner, PCMflash con módulos apropiados. Envía el archivo en formato original sin modificar.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Tiempo de entrega para Stage 1?</h3>
+          <p>Stage 1 para EDC15P típicamente 2-4 horas laborables. Variantes menos comunes pueden requerir 4-8 horas. Servicios especiales (DPF OFF, etc.) bajo consulta de disponibilidad.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Disponéis de archivos para DPF OFF en EDC15P?</h3>
+          <p>Sí, disponible bajo consulta para la mayoría de referencias. Algunos casos requieren validación específica. Sujeto a legislación local - el taller instalador es responsable del uso final.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Se puede hacer Immo OFF en estas ECUs?</h3>
+          <p>Immo OFF disponible bajo consulta para proyectos específicos (ECU de reemplazo, competición). Requiere validación de referencia y archivo original. No es un servicio estándar.</p>
+        </div>
+        <div class="faq-item">
+          <h3>¿Qué pasa si el archivo no funciona?</h3>
+          <p>Incluimos soporte post-venta. Si hay problemas tras la escritura, te ayudamos a diagnosticar si es problema del archivo o de otro tipo (hardware, sensores, etc.). Si es error nuestro, rehacemos el trabajo sin coste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>¿Necesitas un archivo para EDC15P?</h2>
+      <p>Envíanos los datos de tu proyecto y te confirmamos disponibilidad, precio y plazo de entrega.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/491777795542" class="btn btn-whatsapp" target="_blank" rel="noopener">📱 WhatsApp</a>
+        <a href="mailto:info@proecufiles.de" class="btn btn-outline">✉️ Email</a>
+        <a href="index.html#contacto" class="btn">Solicitar Acceso</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">ProECU<span>Files</span></div>
+          <p>Fileservice profesional de calibraciones ECU/TCU para talleres y preparadores. Calidad, rapidez y soporte técnico en cada archivo.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="index.html#servicios">Stage 1</a></li>
+            <li><a href="index.html#servicios">Stage 2</a></li>
+            <li><a href="index.html#servicios">TCM / TCU</a></li>
+            <li><a href="index.html#servicios">DPF / EGR / AdBlue</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ECU Families</h4>
+          <ul>
+            <li><a href="ecu-edc15p.html">Bosch EDC15P</a></li>
+            <li><a href="catalogo.html">Ver Catálogo</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Aviso Legal</a></li>
+            <li><a href="#">Privacidad</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ProECU Files. Servicio exclusivo para profesionales. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
