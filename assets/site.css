@@ -1,0 +1,123 @@
+:root{
+  --primary:#3b82f6;
+  --primary-light:#60a5fa;
+  --primary-dark:#2563eb;
+  --bg:#0a0a0b;
+  --card:#141416;
+  --card2:#1a1a1d;
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --border:#27272a;
+  --ok:#10b981;
+  --warn:#f59e0b;
+  --whatsapp:#25D366;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,sans-serif;line-height:1.6;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Header */
+.header{position:sticky;top:0;z-index:1000;background:rgba(10,10,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{font-weight:800;font-size:1.2rem;letter-spacing:-.3px}
+.brand span{color:var(--primary)}
+.navlinks{display:flex;gap:18px;list-style:none;flex-wrap:wrap}
+.navlinks a{color:var(--muted);font-size:.95rem}
+.navlinks a:hover{color:var(--primary)}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:8px;font-size:.9rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;border-radius:10px;border:1px solid transparent;font-weight:700;font-size:.95rem;cursor:pointer;transition:.2s}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.primary:hover{background:var(--primary-dark)}
+.btn.outline{background:transparent;border-color:var(--border);color:var(--text)}
+.btn.outline:hover{border-color:var(--primary);color:var(--primary)}
+.btn.whatsapp{background:var(--whatsapp);color:#fff}
+.btn.whatsapp:hover{filter:brightness(.95)}
+
+/* Sections */
+.section{padding:78px 0}
+.section.alt{background:linear-gradient(180deg,var(--bg) 0%, #0f0f11 50%, var(--bg) 100%)}
+.kicker{display:inline-block;color:var(--primary);font-weight:800;font-size:.8rem;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.h1{font-size:2.6rem;line-height:1.1;letter-spacing:-1px;margin-bottom:14px}
+.h2{font-size:2rem;line-height:1.15;letter-spacing:-.8px;margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:820px}
+.center{text-align:center}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* Hero */
+.hero{padding:88px 0 72px}
+.badge{display:inline-flex;gap:10px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:var(--primary-light);font-weight:700;font-size:.85rem;margin-bottom:18px}
+.ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:36px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
+.stat .v{font-weight:900;font-size:1.15rem}
+.stat .l{color:var(--muted);font-size:.9rem;margin-top:4px}
+
+/* Cards */
+.grid{display:grid;gap:18px}
+.grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+.card:hover{background:var(--card2)}
+.card h3{font-size:1.1rem;letter-spacing:-.2px;margin-bottom:10px}
+.card p{color:var(--muted)}
+.list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.list li{color:var(--muted)}
+.list li::before{content:"✓ ";color:var(--ok);font-weight:900}
+
+/* Process */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.step{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.step .n{width:34px;height:34px;border-radius:10px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--primary-light);margin-bottom:10px}
+.step .t{font-weight:800;margin-bottom:6px}
+.step .d{color:var(--muted);font-size:.92rem}
+
+/* Pricing */
+.pricingWrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.priceTable{width:100%;border-collapse:collapse;overflow:hidden;border-radius:14px;border:1px solid var(--border);background:var(--card)}
+.priceTable th,.priceTable td{padding:14px 14px;border-bottom:1px solid var(--border);text-align:left}
+.priceTable th{color:var(--text);font-size:.95rem;background:rgba(255,255,255,.02)}
+.priceTable td{color:var(--muted);font-size:.95rem}
+.priceTable tr:last-child td{border-bottom:none}
+.price{color:var(--text);font-weight:900}
+.note{margin-top:12px;color:var(--muted);font-size:.92rem}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--muted);font-size:.9rem}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.faq .q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px}
+.faq .q h3{font-size:1rem;margin-bottom:8px}
+.faq .q p{color:var(--muted);font-size:.95rem}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.kv{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
+.kv .item{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:.95rem}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);background:rgba(255,255,255,.01);padding:42px 0 26px}
+.footerGrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:22px}
+.footer h4{font-size:1rem;margin-bottom:12px}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer a{color:var(--muted)}
+.footer a:hover{color:var(--primary)}
+.small{color:var(--muted);font-size:.9rem}
+.divider{border-top:1px solid var(--border);margin-top:22px;padding-top:18px}
+
+/* Responsive */
+@media (max-width: 980px){
+  .grid.cols3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .pricingWrap{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .footerGrid{grid-template-columns:1fr}
+}
+@media (max-width: 720px){
+  .navlinks{display:none}
+  .h1{font-size:2.05rem}
+  .h2{font-size:1.7rem}
+}

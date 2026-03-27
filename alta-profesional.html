@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Alta profesional | ProECU Files - Fileservice B2B</title>
+  <meta name="description" content="Página de alta profesional para talleres, preparadores, colaboradores y distribuidores. Acceso al fileservice ECU/TCU con soporte técnico y tarifas claras.">
+  <style>
+    :root {
+      --primary:#3b82f6;
+      --primary-light:#60a5fa;
+      --primary-dark:#2563eb;
+      --bg:#0a0a0b;
+      --card:#141416;
+      --card2:#1a1a1d;
+      --text:#f4f4f5;
+      --muted:#a1a1aa;
+      --border:#27272a;
+      --ok:#10b981;
+      --warn:#f59e0b;
+      --whatsapp:#25D366;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,sans-serif;line-height:1.6;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    header{background:rgba(10,10,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
+    .brand{font-weight:800;letter-spacing:-.3px}
+    .brand span{color:var(--primary)}
+    .navlinks{display:flex;gap:18px;list-style:none;flex-wrap:wrap}
+    .navlinks a{color:var(--muted);font-size:.95rem}
+    .navlinks a:hover{color:var(--primary)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 16px;border-radius:10px;border:1px solid transparent;font-weight:800;font-size:.95rem;cursor:pointer;transition:.2s}
+    .btn.primary{background:var(--primary);color:#fff}
+    .btn.primary:hover{background:var(--primary-dark)}
+    .btn.whatsapp{background:var(--whatsapp);color:#fff}
+    .btn.whatsapp:hover{filter:brightness(.95)}
+    .btn.outline{background:transparent;border-color:var(--border);color:var(--text)}
+    .btn.outline:hover{border-color:var(--primary);color:var(--primary)}
+
+    .breadcrumb{padding:18px 0;color:var(--muted);font-size:.92rem}
+    .breadcrumb a{color:var(--primary-light)}
+
+    .hero{padding:38px 0 10px}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;border:1px solid rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:var(--primary-light);font-weight:800;font-size:.85rem;margin-bottom:14px}
+    h1{font-size:2.25rem;line-height:1.15;letter-spacing:-.8px;margin-bottom:10px}
+    .lead{color:var(--muted);font-size:1.05rem;max-width:820px}
+
+    section{padding:44px 0}
+    .grid{display:grid;gap:18px}
+    .grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px}
+    .card:hover{background:var(--card2)}
+    .kicker{display:inline-block;color:var(--primary);font-weight:900;font-size:.8rem;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:10px}
+    h2{font-size:1.5rem;letter-spacing:-.4px;margin-bottom:10px}
+    p{color:var(--muted)}
+    ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+    ul li{color:var(--muted)}
+    ul li::before{content:"✓ ";color:var(--ok);font-weight:900}
+
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+    .step{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .step .n{width:32px;height:32px;border-radius:10px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--primary-light);margin-bottom:10px}
+    .step .t{font-weight:900;margin-bottom:6px;color:var(--text)}
+    .step .d{color:var(--muted);font-size:.92rem}
+
+    form{display:grid;gap:14px}
+    label{font-size:.9rem;color:var(--text);font-weight:700}
+    input,select,textarea{width:100%;padding:12px 12px;background:#0f0f11;border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.95rem;font-family:inherit}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary)}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .hint{font-size:.9rem;color:var(--muted)}
+    .note{border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.10);border-radius:14px;padding:16px;color:var(--muted)}
+    .note strong{color:var(--warn)}
+
+    footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:.92rem}
+
+    @media (max-width: 900px){
+      .grid.cols2{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+      .navlinks{display:none}
+      h1{font-size:1.85rem}
+      .steps{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">ProECU<span>Files</span></div>
+        <ul class="navlinks">
+          <li><a href="/es/">Home</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="ecu-edc15p.html">EDC15P</a></li>
+          <li><a href="#formulario">Formulario</a></li>
+        </ul>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn outline" href="mailto:info@proecufiles.de">Email</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/es/">Inicio</a> / Alta profesional
+    </div>
+
+    <div class="hero">
+      <div class="badge">🧾 Alta profesional B2B • Fileservice ECU/TCU</div>
+      <h1>Alta profesional para talleres, preparadores y colaboradores</h1>
+      <p class="lead">Solicita acceso al fileservice remoto. Esta página es solo para profesionales (B2B). No implementa backend: el formulario es visual y sirve como base de integración futura.</p>
+      <p class="hint" style="margin-top:10px;"><strong>+49 177 7795542</strong> · <strong>info@proecufiles.de</strong> · <strong>24 horas</strong> · <strong>GMT+1</strong></p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;">
+        <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">WhatsApp profesional</a>
+        <a class="btn primary" href="#formulario">Solicitud de alta</a>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="grid cols2">
+        <div class="card">
+          <div class="kicker">Ventajas</div>
+          <h2>¿Por qué registrarte?</h2>
+          <ul>
+            <li>Acceso a tarifas y plazos claros para trabajo diario</li>
+            <li>Soporte técnico post-escritura orientado a taller</li>
+            <li>Gestión profesional de referencias HW/SW y viabilidad por archivo</li>
+            <li>Colaboración estable para volumen y distribuidores</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Proceso</div>
+          <h2>Alta en 3 pasos</h2>
+          <div class="steps">
+            <div class="step"><div class="n">1</div><div class="t">Solicitud</div><div class="d">Rellenas datos de empresa y herramientas.</div></div>
+            <div class="step"><div class="n">2</div><div class="t">Validación</div><div class="d">Confirmamos perfil profesional y canal de trabajo.</div></div>
+            <div class="step"><div class="n">3</div><div class="t">Acceso</div><div class="d">Te damos instrucciones y formato de envío de archivos.</div></div>
+          </div>
+          <div class="note" style="margin-top:14px;"><strong>Nota:</strong> determinadas referencias poco habituales, urgencias o desarrollos a medida se gestionan bajo consulta profesional.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formulario">
+    <div class="container">
+      <div class="grid cols2">
+        <div class="card">
+          <div class="kicker">Formulario</div>
+          <h2>Solicitud de alta profesional</h2>
+          <p>Campos orientativos para captación B2B. No hay envío real todavía (sin backend).</p>
+
+          <form action="#" method="post">
+            <div class="row">
+              <div>
+                <label for="empresa">Empresa / Taller *</label>
+                <input id="empresa" name="empresa" placeholder="Nombre comercial" required>
+              </div>
+              <div>
+                <label for="contacto">Nombre de contacto *</label>
+                <input id="contacto" name="contacto" placeholder="Nombre y apellidos" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="pais">País *</label>
+                <select id="pais" name="pais" required>
+                  <option value="">Selecciona</option>
+                  <option>España</option>
+                  <option>Portugal</option>
+                  <option>Francia</option>
+                  <option>Alemania</option>
+                  <option>Italia</option>
+                  <option>Reino Unido</option>
+                  <option>Suiza</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label for="telefono">Teléfono / WhatsApp *</label>
+                <input id="telefono" name="telefono" placeholder="+34 ..." required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" placeholder="correo@empresa.com" required>
+              </div>
+              <div>
+                <label for="web">Web o redes</label>
+                <input id="web" name="web" placeholder="https://... / Instagram / Facebook">
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="herramienta">Herramienta lectura/escritura *</label>
+                <select id="herramienta" name="herramienta" required>
+                  <option value="">Selecciona</option>
+                  <option>Alientech KESS / K-TAG</option>
+                  <option>Magic Motorsport FLEX</option>
+                  <option>Autotuner</option>
+                  <option>PCMflash</option>
+                  <option>Dimsport / Trasdata</option>
+                  <option>Otra (indicar en comentarios)</option>
+                </select>
+              </div>
+              <div>
+                <label for="tipoVehiculo">Tipo de vehículos *</label>
+                <select id="tipoVehiculo" name="tipoVehiculo" required>
+                  <option value="">Selecciona</option>
+                  <option>Turismos</option>
+                  <option>Furgonetas</option>
+                  <option>Trucks / Industrial</option>
+                  <option>Moto</option>
+                  <option>Marino</option>
+                  <option>Mixto</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="volumen">Volumen aproximado</label>
+                <select id="volumen" name="volumen">
+                  <option value="">Selecciona</option>
+                  <option>1–5 archivos/semana</option>
+                  <option>6–15 archivos/semana</option>
+                  <option>16–30 archivos/semana</option>
+                  <option>30+ archivos/semana</option>
+                </select>
+              </div>
+              <div>
+                <label for="servicios">Servicios de interés</label>
+                <select id="servicios" name="servicios">
+                  <option value="">Selecciona</option>
+                  <option>Stage 1 / Stage 2</option>
+                  <option>TCU / DSG</option>
+                  <option>DPF / EGR / DTC / AdBlue</option>
+                  <option>Immo OFF / soluciones específicas</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="comentarios">Comentarios</label>
+              <textarea id="comentarios" name="comentarios" placeholder="Cuéntanos sobre tu negocio, plataformas habituales, necesidades y urgencia... (sin datos sensibles)"></textarea>
+            </div>
+
+            <div class="note"><strong>Importante:</strong> esta página no envía datos todavía. En fase posterior se conectará a backend/CRM. Por ahora, usa WhatsApp o Email para completar el alta.</div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a class="btn whatsapp" href="https://wa.me/491777795542" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+              <a class="btn outline" href="mailto:info@proecufiles.de">Enviar por email</a>
+              <a class="btn outline" href="formulario-tecnico.html">Formulario técnico de pedido</a>
+              <button class="btn primary" type="button" disabled title="Sin backend">Enviar (pendiente)</button>
+            </div>
+            <p class="hint" style="margin-top:10px;">Si prefieres, usa el <a href="formulario-tecnico.html" style="color:var(--primary-light);">formulario técnico</a> para estructurar el pedido (borrador visual, sin backend).</p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="kicker">Contacto</div>
+          <h2>Datos de contacto</h2>
+          <p>Respuesta en 24–48h laborables.</p>
+          <div class="note" style="margin-top:14px;">
+            <p><strong>WhatsApp:</strong> +49 177 7795542</p>
+            <p><strong>Email:</strong> info@proecufiles.de</p>
+            <p><strong>Horario:</strong> 24 horas</p>
+            <p><strong>Zona:</strong> GMT+1 (servicio 100% remoto)</p>
+          </div>
+          <p class="hint" style="margin-top:14px;">B2B: talleres, preparadores, colaboradores y distribuidores. No trabajamos con particulares.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>© 2026 ProECU Files • Alta profesional B2B</div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="/es/" style="color:var(--primary-light);">Home</a>
+          <a href="catalogo.html" style="color:var(--primary-light);">Catálogo</a>
+          <a href="ecu-edc15p.html" style="color:var(--primary-light);">EDC15P</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

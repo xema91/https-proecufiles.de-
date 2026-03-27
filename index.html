@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ProECU Files | Redirecting…</title>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url=/es/">
+  <script>
+    (function(){
+      try {
+        var map = {
+          'es':'/es/','en':'/en/','de':'/de/','fr':'/fr/','it':'/it/','ru':'/ru/','zh':'/zh/'
+        };
+        var pref = localStorage.getItem('proecu_lang');
+        if (pref && map[pref]) { window.location.replace(map[pref]); return; }
+        var lang = (navigator.language || 'es').toLowerCase();
+        var key = lang.slice(0,2);
+        window.location.replace(map[key] || '/es/');
+      } catch(e) {
+        window.location.replace('/es/');
+      }
+    })();
+  </script>
+</head>
+<body style="background:#0a0a0b;color:#f4f4f5;font-family:system-ui;">
+  <div style="max-width:720px;margin:40px auto;padding:0 16px;">
+    <h1 style="font-size:20px;">ProECU Files</h1>
+    <p style="color:#a1a1aa;">Redirecting to Spanish version…</p>
+    <p style="color:#a1a1aa;">If you are not redirected, choose:</p>
+    <ul>
+      <li><a href="/es/" style="color:#60a5fa;">Español</a></li>
+      <li><a href="/en/" style="color:#60a5fa;">English</a></li>
+      <li><a href="/de/" style="color:#60a5fa;">Deutsch</a></li>
+      <li><a href="/fr/" style="color:#60a5fa;">Français</a></li>
+      <li><a href="/it/" style="color:#60a5fa;">Italiano</a></li>
+      <li><a href="/ru/" style="color:#60a5fa;">Русский</a></li>
+      <li><a href="/zh/" style="color:#60a5fa;">中文</a></li>
+    </ul>
+    <p style="margin-top:16px;color:#a1a1aa;">Professional onboarding:</p>
+    <p><a href="/alta-profesional.html" style="color:#60a5fa;">Alta profesional (talleres / preparadores / colaboradores)</a></p>
+
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid #27272a;">
+      <p style="color:#a1a1aa;">Corporate (draft):</p>
+      <ul>
+        <li><a href="/sobre-nosotros.html" style="color:#60a5fa;">Sobre nosotros</a></li>
+        <li><a href="/contacto.html" style="color:#60a5fa;">Contacto</a></li>
+        <li><a href="/condiciones-fileservice.html" style="color:#60a5fa;">Condiciones fileservice</a></li>
+        <li><a href="/privacidad.html" style="color:#60a5fa;">Privacidad</a></li>
+        <li><a href="/cookies.html" style="color:#60a5fa;">Cookies</a></li>
+      </ul>
+      <p style="color:#a1a1aa;">+49 177 7795542 · info@proecufiles.de · 24 horas · GMT+1</p>
+    </div>
+  </div>
+</body>
+</html>
